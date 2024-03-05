@@ -63,7 +63,6 @@ form{
     border:1px solid;
     width:100%;
     height:100vh;
-
     display:flex;
     justify-content: center;
     align-items: center;
@@ -112,4 +111,20 @@ textarea{
     background-color: #f2f2f26b;
     border:none;
     outline:none;
+}
+
+span{
+    font-size: small;
+    font-weight: bolder;
+    font-family:sans-serif;
+}
+
+.page3{
+    border:1px solid;
+    width:100%;
+    height:100vh;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    background-color:  rgba(0, 0, 0, 0.692);
 }
