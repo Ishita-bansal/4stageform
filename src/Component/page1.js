@@ -1,6 +1,7 @@
 import React,{useState,useEffect} from 'react';
-
 import { useNavigate } from 'react-router-dom';
+
+import back from './images/background.jpg'
 import './Style.css';
 function Page1(){
     const navigate = useNavigate();
@@ -61,7 +62,11 @@ function Page1(){
     }
 
     return(
- <div className='formcontainer'>
+<div className='formcontain'>
+<div className="left">
+       <img src={back} height="430" width="400" alt=""/>
+   </div>
+      <div className='formcontainer'>
      <form onSubmit={getformdata}>
         <div className='items'>
         <label>Name:</label>
@@ -107,6 +112,9 @@ function Page1(){
      </div>
    </form>
  </div>
+  
+ </div>
+ 
     )
 }
 

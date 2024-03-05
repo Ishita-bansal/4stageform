@@ -1,6 +1,7 @@
 import "./Style.css";
 import {useNavigate} from 'react-router-dom';
 import {useState,useEffect} from 'react';
+import back from './images/background.jpg'
 function Page2() {
      const [address1,setaddress1] = useState('');
      const [address2,setaddress2] = useState('');
@@ -42,8 +43,11 @@ function getaddressdata(e){
          }
     }
 return (
-    <div className="add">
-      <div className="address">
+
+    <div className="add"> 
+    <div className="left">
+       <img src={back} height="430" width="400" alt=""/>
+   </div>
         <form onSubmit={getaddressdata}>
       <div className="backbtn">
         <button type="button" onClick={()=>{navigate('/')}}>Back</button>
@@ -74,7 +78,7 @@ return (
         </div>
         </form>
       </div>
-    </div>
+   
   );
 }
 

@@ -1,6 +1,7 @@
 
 import { useNavigate} from 'react-router-dom';
 import {useState,useEffect} from 'react';
+import back from './images/background.jpg'
 function Page3(){
     const navigate = useNavigate();
     const [Credit,setcredit] = useState('');
@@ -51,6 +52,9 @@ function Page3(){
     }
     return(
   <div className="page3">
+     <div className="left">
+       <img src={back} height="430" width="400" alt=""/>
+   </div>
     <form onSubmit={getcreditData}>
         <div className="backbtn">
         <button type="button" onClick={()=>{navigate('/page2')}}>Back</button>
@@ -60,7 +64,7 @@ function Page3(){
         <label>Credit Number:</label>
         <input type="number" onChange={(e)=>setcredit(e.target.value)} value={Credit}/>
         {
-           (!creditregex.test(Credit.toString())) && 
+           (!creditregex.test(Credit)) && 
             <span style={{color:'red'}}>Invalid Number</span>
         }
         </div>
