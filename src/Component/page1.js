@@ -11,23 +11,27 @@ function Page1(){
       const [gender ,setGender] =useState('');
       const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
       useEffect(() => {
-        const storedUserData = localStorage.getItem("UserInfo");
-        if (storedUserData) {
+
+        if(localStorage.getItem("UserInfo")!==null)
+        {
+         const storedUserData = localStorage.getItem("UserInfo");
+        if (storedUserData!==null) {
             const userData = JSON.parse(storedUserData);
-            setName(userData.Name);
-            setDate(userData.Date);
-            setEmail(userData.Email);
-            setGender(userData.Gender);
+            setName(userData?.Name);
+            setDate(userData?.Date);
+            setEmail(userData?.Email);
+            setGender(userData?.Gender);
         }
+      }
     }, []);
+   
 
 
     function getformdata(e){
        e.preventDefault();
-        if(name === "")
-        {
-          console.log("Enter the name")
-        }
+       if (name === "" || !date || gender === "" || !email.match(emailRegex)) {
+        console.log("Form fields are not properly filled");
+      } 
         else{
             
             const hasData = localStorage.getItem("UserInfo");
@@ -64,49 +68,51 @@ function Page1(){
     return(
 <div className='formcontain'>
 <div className="left">
-       <img src={back} height="430" width="400" alt=""/>
+       <img src={back} height="455" width="450" alt=""/>
    </div>
       <div className='formcontainer'>
      <form onSubmit={getformdata}>
         <div className='items'>
         <label>Name:</label>
        <input type="text"  onChange={(e)=>{setName(e.target.value)}} value={name} />
+       </div>
+
        {
-       name< 3 &&
+       name < 3 &&
        <span style={{color:'red'}}>Name must be greater than 2 characters</span>
        }
-       </div>
        
 
        <div className='items'>
        <label>DOB:</label>
-       <input type='date' onChange={(e)=>{setDate(e.target.value)}} value={date}/>
+       <input type="date" onChange={(e)=>{setDate(e.target.value)}} value={date || ''}/>
+       </div>
        {
-        date === ""&&
+        !date &&
         <span style={{color:'red'}}>*Required</span>
        }
-       </div>
-
        <div className='items'>
       <label required>Gender:</label>
        <input type='radio' value="male" onChange={(e)=>{setGender(e.target.value)}} checked ={gender === 'male'}/>
         <label>Male</label>
         <input type='radio' value="female" onChange={(e)=>{setGender(e.target.value)}} checked= {gender === 'female'}/>
        <label>Female</label>
+       </div>
        {
         gender===""&&
         <span style={{color:'red'}}>*Required</span>
        }
-       </div>
+       
 
        <div className='items'>
        <label>Email:</label>
       <input type='email' onChange={(e)=>{setEmail(e.target.value)}} value={email}/>
+      </div>
       {
-       (!email.match(emailRegex))?
+       (!email?.match(emailRegex))?
           <span style={{color:'red'}}>Enter valid email</span> : ""
       }
-      </div>
+      
       <div className="btn">
      <button className="btns" type="submit" >Next</button>
      </div>

@@ -13,6 +13,7 @@ function Page4() {
     Gender: "",
     PermanentAddress : "",
     CorresponsingAddress: "",
+    checkAddress :"",
     creditcard: "",
     expirydate: "",
     username: "",
@@ -39,18 +40,14 @@ function Page4() {
   return (
     <div className="page4">
        <div className="left">
-       <img src={back} height="430" width="400" alt=""/>
+       <img src={back} height="455" width="450" alt=""/>
    </div>
       <form onSubmit={getfinaldata}>
         <div className="backbtn">
-          <button
-            type="button"
-            onClick={() => {
-              navigate("/page3");
-            }}
-          >
-            Back
-          </button>
+          <button type="button" onClick={() => { navigate("/page3");}} >Back</button>
+        </div>
+        <div>
+          <h3>All User Details</h3>
         </div>
         <div className="items">
           <label>Name:</label>
