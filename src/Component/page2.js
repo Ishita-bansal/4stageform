@@ -16,10 +16,11 @@ function Page2() {
         const userData = JSON.parse(storedUserData);
         setpage2data({
           address1: userData.PermanentAddress,
-          address2:userData.CorresponsingAddress,
-          checked:userData.checkAddress
-        });
-       }
+          address2: userData.CorrespondingAddress,
+          checked: userData.checkAddress
+      });
+     
+      }
      },[]);
 
 function getaddressdata(e){
@@ -28,16 +29,20 @@ function getaddressdata(e){
           console.log("enter a valid email")
          }
          else{
-     let userData = localStorage.getItem("UserInfo");
-     if(userData){
-      userData = JSON.parse(userData);
-      userData={...userData,PermanentAddress: page2data.address1, CorresponsingAddress: page2data.address2, checkAddress: page2data.checked}
-     }
-  console.log(userData.checkAddress);
-  localStorage.setItem("UserInfo" , JSON.stringify(userData));
+            let userData = localStorage.getItem("UserInfo");
+             if(userData){
+                userData = JSON.parse(userData);
+                userData={
+                  ...userData,PermanentAddress: page2data.address1, 
+                  CorresponsingAddress:page2data.checked ? page2data.address1 : page2data.address2, 
+                  checkAddress: page2data.checked
+                };
+        console.log(userData.checkAddress);
+        localStorage.setItem("UserInfo" , JSON.stringify(userData));
+   }
         navigate('/page3');
-         }
-    }
+    }      
+  }
 return (
 
     <div className="add"> 
@@ -60,10 +65,12 @@ return (
         </div>
         <div className="item">
           <div className="check">
-            <input type="checkbox"  checked={!page2data.checked} onChange={()=>setpage2data(page2data=>({...page2data,checked : !page2data.checked}))}/>
+            <input type="checkbox"  checked={page2data.checked} onChange={()=>setpage2data(prevState=>({...prevState,
+              checked : !prevState.checked,
+              address2: prevState.checked ? prevState.address1 : ''}))}/>
             <label>Is Above Address Same?</label>
           </div>
-          {page2data.checked && <textarea onChange = {(e)=>{setpage2data({...page2data,address2:e.target.value})}} value={page2data.address2} rows="3" cols="35"></textarea> }
+          {!page2data.checked && <textarea onChange = {(e)=>{setpage2data({...page2data,address2:e.target.value})}} value={page2data.address2} rows="3" cols="35"></textarea>}
          </div>
           {
           page2data.address2 > 10  &&
